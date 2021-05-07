@@ -1,0 +1,9 @@
+.idea/
+*__pycache__*
+results/
+
+## mac DS_Store
+*.DS_Store
+
+## trash files
+*.zip
