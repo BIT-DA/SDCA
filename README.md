@@ -2,11 +2,17 @@
 
 Pytorch Implementation for TPAMI manuscript ([Special Issue on Learning with Fewer Labels in Computer Vision](https://lwflcv.github.io/)): Semantic Distribution-aware Contrastive Adaptation for Semantic Segmentation.
 
+**Update on 2021/05/12: ArXiv Version of SDCA is available at  [this https URL](https://arxiv.org/abs/2105.05013).**
 
+### Introduction
+
+In this paper, we present a new *semantic distribution-aware contrastive adaptation* algorithm, dubbed as SDCA, that enables pixel-wise representation alignment across domains under the guidance of the semantic distributions. To be precise, we first design a novel contrastive loss at pixel level by considering the correspondences between the semantic distributions and pixel-wise representations from both domains. Essentially, clusters of pixel representations from the same category are obliged to cluster together and those from different categories are obliged to spread out, boosting segmentation capability of the model. Next, an upper bound on this formulation is derived by implicitly involving the simultaneous learning of an infinite number of (dis)similar pixel pairs, making it highly efficient. 
 
 ![Teaser](docs/diagram.png)
 
 <!-- <br> -->
+
+### 
 
 ![Compare](docs/compare.png)
 
