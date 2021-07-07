@@ -153,12 +153,13 @@ def train(cfg, local_rank, distributed):
         src_out = classifier(src_feat)
         tgt_feat = feature_extractor(tgt_input)
         tgt_out = classifier(tgt_feat)
+        tgt_out_softmax = F.softmax(tgt_out, dim=1)
 
         # supervision loss
         src_pred = F.interpolate(src_out, size=src_size, mode='bilinear', align_corners=True)
         if cfg.SOLVER.LAMBDA_LOV > 0:
-            pred_softmax = F.softmax(src_pred, dim=1)
-            loss_lov = lovasz_softmax(pred_softmax, src_label, ignore=255)
+            src_pred_softmax = F.softmax(src_pred, dim=1)
+            loss_lov = lovasz_softmax(src_pred_softmax, src_label, ignore=255)
             loss_sup = ce_criterion(src_pred, src_label) + cfg.SOLVER.LAMBDA_LOV * loss_lov
             meters.update(loss_lov=loss_lov.item())
         else:
@@ -170,9 +171,9 @@ def train(cfg, local_rank, distributed):
         src_mask = F.interpolate(src_label.unsqueeze(0).float(), size=(Hs, Ws), mode='nearest').squeeze(0).long()
         src_mask = src_mask.contiguous().view(B * Hs * Ws, )
         assert not src_mask.requires_grad
-        # target mask: constant threshold -- cfg.SOLVER.THRESHOLD
+        # target mask: constant threshold
         _, _, Ht, Wt = tgt_feat.size()
-        tgt_out_maxvalue, tgt_mask = torch.max(tgt_out, dim=1)
+        tgt_out_maxvalue, tgt_mask = torch.max(tgt_out_softmax, dim=1)
         for i in range(cfg.MODEL.NUM_CLASSES):
             tgt_mask[(tgt_out_maxvalue < cfg.SOLVER.DELTA) * (tgt_mask == i)] = 255
         tgt_mask = tgt_mask.contiguous().view(B * Ht * Wt, )
