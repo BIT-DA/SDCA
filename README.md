@@ -148,3 +148,15 @@ python test.py -cfg configs/deeplabv2_r101_ssl.yaml resume results/r101_g2c_ours
 ### Acknowledgments
 
 This code is heavily borrowed from [FADA](https://github.com/JDAI-CV/FADA).  
+
+## Citation
+If you find it useful to your research, please give credit to the following paper
+
+```
+@article{Li_2021_SDCA,
+  title={Semantic Distribution-aware Contrastive Adaptation for Semantic Segmentation},
+  author={Shuang Li, Binhui Xie, Bin Zang, Chi Harold Liu, Xinjing Cheng, Ruigang Yang, and Guoren Wang},
+  journal={arXiv preprint arXiv:2105.05013},
+  year={2021}
+}
+```
