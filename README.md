@@ -1,6 +1,6 @@
-# TPAMISI-SDCA
+# SDCA
 
-Pytorch Implementation for TPAMI manuscript ([Special Issue on Learning with Fewer Labels in Computer Vision](https://lwflcv.github.io/)): Semantic Distribution-aware Contrastive Adaptation for Semantic Segmentation.
+Pytorch Implementation for Semantic Distribution-aware Contrastive Adaptation for Semantic Segmentation.
 
 **Update on 2021/05/12: ArXiv Version of SDCA is available at  [this https URL](https://arxiv.org/abs/2105.05013).**
 
